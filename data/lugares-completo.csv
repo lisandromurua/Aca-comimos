@@ -76,3 +76,4 @@ id,nombre,provincia,localidad,barrio,momento_dia,precio,comida,lugar,atencion,no
 78,Kim Chino,Buenos Aires,Ciudad de Buenos Aires,,Almuerzo,$$$,7.5,7.5,7,7.38,"Meh, cumple.",1,
 79,Rita,Buenos Aires,Ciudad de Buenos Aires,,Desayuno,$$$,8.5,8.75,8.5,8.56,"Igual que Ninina: muy lindo lugar, se lo ve limpio y ordenado. La atención es buena. La comida es rica y el café excelente.",1,
 80,Il Ballo del Mattone,Buenos Aires,Ciudad de Buenos Aires,,Almuerzo,$$$$,8.75,8,8.25,8.44,"El lugar tiene mucho estilo, una mezcla de bodegón con bar bohemio que funciona. La comida es bárbara, aunque resultó un tanto costosa en relación al tamaño de la porción y los sabores.",1,
+81,Pituco,Córdoba,Córdoba Capital,Nueva Córdoba,Cena,$$$,8.5,8.75,8.5,8.56,"Como el nombre indica, es muy ""pituco"" todo. Prolijito, rico y sencillo. La comida es muy rica, de carta acotada pero cumple. Fuerte al medio.",1,
