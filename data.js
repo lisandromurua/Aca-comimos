@@ -1387,5 +1387,23 @@ window.PLACES = [
     "distincion": null,
     "lat": -34.601947,
     "lon": -58.380553
+  },
+  {
+    "id": 81,
+    "nombre": "Pituco",
+    "provincia": "Córdoba",
+    "localidad": "Córdoba Capital",
+    "barrio": "Nueva Córdoba",
+    "momento": "Cena",
+    "precio": "$$$",
+    "comida": 8.5,
+    "lugar": 8.75,
+    "atencion": 8.5,
+    "nota": 8.56,
+    "resena": "Como el nombre indica, es muy \"pituco\" todo. Prolijito, rico y sencillo. La comida es muy rica, de carta acotada pero cumple. Fuerte al medio.",
+    "visitas": "1",
+    "distincion": null,
+    "lat": -31.430639,
+    "lon": -64.184264
   }
 ];
