@@ -29,6 +29,9 @@
   const rosetteSvg = (size, fill) =>
     `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill}" stroke="none"><circle cx="18" cy="12" r="5"/><circle cx="15" cy="17.2" r="5"/><circle cx="9" cy="17.2" r="5"/><circle cx="6" cy="12" r="5"/><circle cx="9" cy="6.8" r="5"/><circle cx="15" cy="6.8" r="5"/><circle cx="12" cy="12" r="3.5" fill="var(--ink)"/></svg>`;
 
+  const starSvg = (size, fill) =>
+    `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${fill}" stroke="none"><path d="M12 2.5l2.9 6.24 6.6.69-4.95 4.6 1.35 6.6L12 17.6l-5.9 3.03 1.35-6.6-4.95-4.6 6.6-.69z"/></svg>`;
+
   function locationLabel(p) {
     return [p.barrio, p.localidad].filter(Boolean).join(" · ") || p.localidad;
   }
@@ -46,8 +49,10 @@
     barrio: "",
     momento: "",
     precio: "",
+    categoria: "",
     minScore: 0,
     onlyDistincion: false,
+    onlyRecomendado: false,
     view: "grid",
   };
 
@@ -79,6 +84,7 @@
     fillSelect($("#f-provincia"), uniqueSorted(PLACES.map((p) => p.provincia)), "Provincia");
     fillSelect($("#f-momento"), uniqueSorted(PLACES.map((p) => p.momento)), "Momento del día");
     fillSelect($("#f-precio"), uniqueSorted(PLACES.map((p) => p.precio)).sort((a, b) => a.length - b.length), "Precio");
+    fillSelect($("#f-categoria"), uniqueSorted(PLACES.map((p) => p.categoria)), "Categoría");
     refreshDependentSelects();
   }
 
@@ -90,8 +96,10 @@
     if (state.barrio && p.barrio !== state.barrio) return false;
     if (state.momento && p.momento !== state.momento) return false;
     if (state.precio && p.precio !== state.precio) return false;
+    if (state.categoria && p.categoria !== state.categoria) return false;
     if (p.nota === null || p.nota < state.minScore) return false;
     if (state.onlyDistincion && !p.distincion) return false;
+    if (state.onlyRecomendado && !p.recomendado) return false;
     return true;
   }
 
@@ -104,10 +112,17 @@
     const distincionBadge = p.distincion
       ? `<div class="photo-badge" title="${p.distincion}">${rosetteSvg(15, "white")}</div>`
       : "";
+    const favBadge = p.recomendado
+      ? `<div class="fav-badge" title="Recomendado">${starSvg(13, "white")}</div>`
+      : "";
+    const categoriaTag = p.categoria
+      ? `<div class="tag tag-categoria">${p.categoria}</div>`
+      : "";
     return `
       <article class="card" data-id="${p.id}">
         <div class="card-photo" style="background:${gradientFor(p.id)};">
           ${placeholderIconSvg(28)}
+          ${favBadge}
           ${distincionBadge}
         </div>
         <div class="card-body">
@@ -117,6 +132,7 @@
           </div>
           <div class="card-loc">${locationLabel(p)}</div>
           <div class="card-tags">
+            ${categoriaTag}
             <div class="tag tag-momento">${p.momento}</div>
             <div class="tag tag-precio">${p.precio}</div>
           </div>
@@ -206,6 +222,12 @@
     const distincionTag = p.distincion
       ? `<div class="badge-distincion">${rosetteSvg(12, "white")}${p.distincion}</div>`
       : "";
+    const recomendadoTag = p.recomendado
+      ? `<div class="badge-recomendado">${starSvg(12, "white")}Recomendado</div>`
+      : "";
+    const categoriaTag = p.categoria
+      ? `<div class="tag tag-categoria">${p.categoria}</div>`
+      : "";
     const bar = (label, val) => `
       <div class="bar-row"><span>${label}</span><span style="font-weight:600;">${val != null ? val.toFixed(2) : "-"}</span></div>
       <div class="bar-track"><div class="bar-fill" style="width:${val != null ? (val * 10) + "%" : "0%"};"></div></div>`;
@@ -222,9 +244,11 @@
           </div>
           <div class="detail-name">${p.nombre}</div>
           <div class="detail-tags">
+            ${categoriaTag}
             <div class="tag tag-momento">${p.momento}</div>
             <div class="tag tag-precio">${p.precio}</div>
             ${distincionTag}
+            ${recomendadoTag}
           </div>
         </div>
 
@@ -322,6 +346,10 @@
       state.precio = e.target.value;
       renderAll();
     });
+    $("#f-categoria").addEventListener("change", (e) => {
+      state.categoria = e.target.value;
+      renderAll();
+    });
     $("#f-score").addEventListener("input", (e) => {
       state.minScore = Number(e.target.value);
       $("#f-score-val").textContent = state.minScore.toFixed(1).replace(/\.0$/, "");
@@ -331,16 +359,22 @@
       state.onlyDistincion = e.target.checked;
       renderAll();
     });
+    $("#f-recomendado").addEventListener("change", (e) => {
+      state.onlyRecomendado = e.target.checked;
+      renderAll();
+    });
     $("#f-clear").addEventListener("click", () => {
       state.search = ""; state.provincia = ""; state.localidad = ""; state.barrio = "";
-      state.momento = ""; state.precio = ""; state.minScore = 0; state.onlyDistincion = false;
+      state.momento = ""; state.precio = ""; state.categoria = ""; state.minScore = 0;
+      state.onlyDistincion = false; state.onlyRecomendado = false;
       $("#f-search").value = "";
       $("#f-score").value = 0;
       $("#f-score-val").textContent = "0";
       $("#f-distincion").checked = false;
+      $("#f-recomendado").checked = false;
       refreshDependentSelects();
       $("#f-provincia").value = ""; $("#f-localidad").value = ""; $("#f-barrio").value = "";
-      $("#f-momento").value = ""; $("#f-precio").value = "";
+      $("#f-momento").value = ""; $("#f-precio").value = ""; $("#f-categoria").value = "";
       renderAll();
     });
 

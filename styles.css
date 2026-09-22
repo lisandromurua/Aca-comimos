@@ -98,6 +98,7 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
 .card-photo svg{opacity:.85;}
 .photo-badge{position:absolute;top:9px;right:9px;width:26px;height:26px;border-radius:999px;background:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
 .status-ribbon{position:absolute;top:9px;left:9px;background:oklch(30% 0.01 50/.78);color:white;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:600;}
+.fav-badge{position:absolute;top:9px;left:9px;width:26px;height:26px;border-radius:999px;background:oklch(70% 0.16 75);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
 .card-body{padding:13px;display:flex;flex-direction:column;gap:7px;}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;}
 .card-name{font-family:'Newsreader',serif;font-weight:600;font-size:15.5px;line-height:1.25;}
@@ -106,6 +107,7 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
 .tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10.5px;font-weight:600;}
 .tag-momento{background:var(--accent-soft);color:var(--accent-dark);}
 .tag-precio{background:var(--surface-2);color:var(--ink-soft);}
+.tag-categoria{background:var(--ink);color:white;}
 .score-badge{
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
   width:32px;height:32px;border-radius:999px;background:var(--ink);color:white;
@@ -146,6 +148,7 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
 .detail-name{font-family:'Newsreader',serif;font-size:24px;font-weight:700;margin-top:4px;}
 .detail-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
 .badge-distincion{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:var(--ink);color:white;font-size:11.5px;font-weight:600;}
+.badge-recomendado{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:oklch(70% 0.16 75);color:white;font-size:11.5px;font-weight:600;}
 .detail-score-row{display:flex;align-items:center;gap:16px;}
 .detail-score-circle{width:64px;height:64px;border-radius:999px;background:var(--ink);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
 .detail-score-circle .n{font-family:'Newsreader',serif;font-size:22px;font-weight:700;line-height:1;}
