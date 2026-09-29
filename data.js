@@ -1,7 +1,8 @@
 // Datos de Comimos Acá — generado desde data/lugares-completo.csv
 // Los lugares marcados como cerrados en el CSV se excluyen de este archivo.
 // Coordenadas: exactas cuando la fila tiene 'ubicacion' cargada; si no, aproximadas a nivel de barrio/localidad.
-// No editar a mano: correr tools/build_data.py despues de tocar el CSV.
+// Fotos: se detectan automáticamente desde images/<id>-<n>.jpg (ver tools/build_data.py).
+// No editar a mano: correr tools/build_data.py despues de tocar el CSV o la carpeta images/.
 window.PLACES = [
   {
     "id": 1,
@@ -20,6 +21,9 @@ window.PLACES = [
     "visitas": "3",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/1-1.jpg"
+    ],
     "lat": -31.41426,
     "lon": -64.169075
   },
@@ -40,6 +44,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/2-1.jpg",
+      "images/2-2.jpg"
+    ],
     "lat": -31.414349,
     "lon": -64.165468
   },
@@ -60,6 +68,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.414391,
     "lon": -64.168698
   },
@@ -80,6 +89,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.416947,
     "lon": -64.169882
   },
@@ -100,6 +110,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.418325,
     "lon": -64.170681
   },
@@ -120,6 +131,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.416901,
     "lon": -64.170174
   },
@@ -140,6 +152,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.407509,
     "lon": -64.164975
   },
@@ -160,6 +173,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.414719,
     "lon": -64.165442
   },
@@ -180,6 +194,14 @@ window.PLACES = [
     "visitas": "3",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/9-1.jpg",
+      "images/9-2.jpg",
+      "images/9-3.jpg",
+      "images/9-4.jpg",
+      "images/9-5.jpg",
+      "images/9-6.jpg"
+    ],
     "lat": -31.414871,
     "lon": -64.16424
   },
@@ -200,6 +222,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.415826,
     "lon": -64.17335
   },
@@ -220,6 +243,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.41742,
     "lon": -64.172453
   },
@@ -240,6 +264,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [],
     "lat": -31.415133,
     "lon": -64.166663
   },
@@ -260,6 +285,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.360176,
     "lon": -64.238789
   },
@@ -280,6 +306,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.395673,
     "lon": -64.253612
   },
@@ -300,6 +327,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.360878,
     "lon": -64.236341
   },
@@ -320,6 +348,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.364742,
     "lon": -64.238277
   },
@@ -340,6 +369,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/19-1.jpg"
+    ],
     "lat": -31.353275,
     "lon": -64.249503
   },
@@ -360,6 +392,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.431587,
     "lon": -64.173021
   },
@@ -380,6 +413,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.433025,
     "lon": -64.180353
   },
@@ -400,6 +434,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.430474,
     "lon": -64.176804
   },
@@ -420,6 +455,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/23-1.jpg",
+      "images/23-2.jpg"
+    ],
     "lat": -31.450275,
     "lon": -64.176476
   },
@@ -440,6 +479,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/24-1.jpg"
+    ],
     "lat": -31.450644,
     "lon": -64.17875
   },
@@ -460,6 +502,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.448866,
     "lon": -64.182874
   },
@@ -480,6 +523,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.451096,
     "lon": -64.177365
   },
@@ -500,6 +544,12 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/29-1.jpg",
+      "images/29-2.jpg",
+      "images/29-3.jpg",
+      "images/29-4.jpg"
+    ],
     "lat": -31.450747,
     "lon": -64.175528
   },
@@ -520,6 +570,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/30-1.jpg"
+    ],
     "lat": -31.45105,
     "lon": -64.175625
   },
@@ -540,6 +593,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.450782,
     "lon": -64.175848
   },
@@ -560,6 +614,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.45098,
     "lon": -64.176836
   },
@@ -580,6 +635,11 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/33-1.jpg",
+      "images/33-2.jpg",
+      "images/33-3.jpg"
+    ],
     "lat": -31.448628,
     "lon": -64.183197
   },
@@ -600,6 +660,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/34-1.jpg"
+    ],
     "lat": -31.436752,
     "lon": -64.178435
   },
@@ -620,6 +683,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/35-1.jpg",
+      "images/35-2.jpg"
+    ],
     "lat": -31.434727,
     "lon": -64.177759
   },
@@ -640,6 +707,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.398485,
     "lon": -64.180631
   },
@@ -660,6 +728,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.39118,
     "lon": -64.183033
   },
@@ -680,6 +749,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/38-1.jpg"
+    ],
     "lat": -31.392118,
     "lon": -64.185996
   },
@@ -700,6 +772,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/39-1.jpg"
+    ],
     "lat": -31.401003,
     "lon": -64.176694
   },
@@ -720,6 +795,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/40-1.jpg"
+    ],
     "lat": -31.395045,
     "lon": -64.179804
   },
@@ -740,6 +818,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/43-1.jpg"
+    ],
     "lat": -31.418613,
     "lon": -64.191215
   },
@@ -760,6 +841,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.403728,
     "lon": -64.218769
   },
@@ -780,6 +862,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [],
     "lat": -31.420066,
     "lon": -64.495977
   },
@@ -800,6 +883,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [],
     "lat": -31.417004,
     "lon": -64.504572
   },
@@ -820,6 +904,12 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/48-1.jpg",
+      "images/48-2.jpg",
+      "images/48-3.jpg",
+      "images/48-4.jpg"
+    ],
     "lat": -31.414623,
     "lon": -64.192138
   },
@@ -840,6 +930,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/51-1.jpg",
+      "images/51-2.jpg"
+    ],
     "lat": -31.417746,
     "lon": -64.190829
   },
@@ -860,6 +954,12 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/52-1.jpg",
+      "images/52-2.jpg",
+      "images/52-3.jpg",
+      "images/52-4.jpg"
+    ],
     "lat": -31.41853,
     "lon": -64.192602
   },
@@ -880,6 +980,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.424606,
     "lon": -64.181709
   },
@@ -900,6 +1001,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.423814,
     "lon": -64.186798
   },
@@ -920,6 +1022,9 @@ window.PLACES = [
     "visitas": "4-5",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/55-1.jpg"
+    ],
     "lat": -31.455004,
     "lon": -64.237585
   },
@@ -940,6 +1045,7 @@ window.PLACES = [
     "visitas": "",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -31.459213,
     "lon": -64.182761
   },
@@ -960,6 +1066,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/57-1.jpg"
+    ],
     "lat": -31.461838,
     "lon": -64.18738
   },
@@ -980,6 +1089,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/60-1.jpg",
+      "images/60-2.jpg"
+    ],
     "lat": -30.994717,
     "lon": -64.461927
   },
@@ -1000,6 +1113,7 @@ window.PLACES = [
     "visitas": "5+",
     "distincion": null,
     "recomendado": true,
+    "fotos": [],
     "lat": -31.155372,
     "lon": -64.287037
   },
@@ -1020,6 +1134,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/62-1.jpg"
+    ],
     "lat": -31.121148,
     "lon": -64.333234
   },
@@ -1040,6 +1157,15 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/63-1.jpg",
+      "images/63-2.jpg",
+      "images/63-3.jpg",
+      "images/63-4.jpg",
+      "images/63-5.jpg",
+      "images/63-6.jpg",
+      "images/63-7.jpg"
+    ],
     "lat": -31.154814,
     "lon": -64.310442
   },
@@ -1060,6 +1186,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/66-1.jpg"
+    ],
     "lat": -32.06925,
     "lon": -64.536986
   },
@@ -1080,6 +1209,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/67-1.jpg"
+    ],
     "lat": -34.586765,
     "lon": -58.432591
   },
@@ -1100,6 +1232,12 @@ window.PLACES = [
     "visitas": "1",
     "distincion": "3 estrellas Michelin",
     "recomendado": true,
+    "fotos": [
+      "images/68-1.jpg",
+      "images/68-2.jpg",
+      "images/68-3.jpg",
+      "images/68-4.jpg"
+    ],
     "lat": -34.58627,
     "lon": -58.429005
   },
@@ -1120,6 +1258,12 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/69-1.jpg",
+      "images/69-2.jpg",
+      "images/69-3.jpg",
+      "images/69-4.jpg"
+    ],
     "lat": -34.603734,
     "lon": -58.379531
   },
@@ -1140,6 +1284,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/70-1.jpg"
+    ],
     "lat": -34.603912,
     "lon": -58.38511
   },
@@ -1160,6 +1307,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [],
     "lat": -34.603477,
     "lon": -58.378648
   },
@@ -1180,6 +1328,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/72-1.jpg",
+      "images/72-2.jpg"
+    ],
     "lat": -34.590111,
     "lon": -58.425807
   },
@@ -1200,6 +1352,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/73-1.jpg",
+      "images/73-2.jpg"
+    ],
     "lat": -34.583319,
     "lon": -58.392525
   },
@@ -1220,6 +1376,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/74-1.jpg",
+      "images/74-2.jpg"
+    ],
     "lat": -34.580496,
     "lon": -58.414897
   },
@@ -1240,6 +1400,13 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": true,
+    "fotos": [
+      "images/75-1.jpg",
+      "images/75-2.jpg",
+      "images/75-3.jpg",
+      "images/75-4.jpg",
+      "images/75-5.jpg"
+    ],
     "lat": -34.587934,
     "lon": -58.391054
   },
@@ -1260,6 +1427,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/76-1.jpg"
+    ],
     "lat": -34.584019,
     "lon": -58.434471
   },
@@ -1280,6 +1450,9 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/77-1.jpg"
+    ],
     "lat": -34.603732,
     "lon": -58.386003
   },
@@ -1300,6 +1473,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -34.591091,
     "lon": -58.428682
   },
@@ -1320,6 +1494,10 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/79-1.jpg",
+      "images/79-2.jpg"
+    ],
     "lat": -34.556041,
     "lon": -58.451422
   },
@@ -1340,6 +1518,7 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [],
     "lat": -34.589964,
     "lon": -58.428347
   },
@@ -1360,6 +1539,11 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/81-1.jpg",
+      "images/81-2.jpg",
+      "images/81-3.jpg"
+    ],
     "lat": -34.581675,
     "lon": -58.438123
   },
@@ -1380,7 +1564,37 @@ window.PLACES = [
     "visitas": "1",
     "distincion": null,
     "recomendado": false,
+    "fotos": [
+      "images/82-1.jpg",
+      "images/82-2.jpg",
+      "images/82-3.jpg",
+      "images/82-4.jpg",
+      "images/82-5.jpg"
+    ],
     "lat": -31.426281,
     "lon": -64.188838
+  },
+  {
+    "id": 83,
+    "nombre": "Catu pastelería",
+    "provincia": "Córdoba",
+    "localidad": "Córdoba Capital",
+    "barrio": "Cofico",
+    "categoria": "Café/Confitería",
+    "momento": "Merienda",
+    "precio": "$$$",
+    "comida": 8.5,
+    "lugar": 8.0,
+    "atencion": 7.75,
+    "nota": 8.19,
+    "resena": "",
+    "visitas": "1",
+    "distincion": null,
+    "recomendado": false,
+    "fotos": [
+      "images/83-1.jpg"
+    ],
+    "lat": -31.39961,
+    "lon": -64.18411
   }
 ];

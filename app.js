@@ -118,10 +118,14 @@
     const categoriaTag = p.categoria
       ? `<div class="tag tag-categoria">${p.categoria}</div>`
       : "";
+    const hasPhoto = Array.isArray(p.fotos) && p.fotos.length > 0;
+    const photoStyle = hasPhoto
+      ? `background-image:url('${p.fotos[0]}');background-size:cover;background-position:center;`
+      : `background:${gradientFor(p.id)};`;
     return `
       <article class="card" data-id="${p.id}">
-        <div class="card-photo" style="background:${gradientFor(p.id)};">
-          ${placeholderIconSvg(28)}
+        <div class="card-photo" style="${photoStyle}">
+          ${hasPhoto ? "" : placeholderIconSvg(28)}
           ${favBadge}
           ${distincionBadge}
         </div>
@@ -231,11 +235,26 @@
     const bar = (label, val) => `
       <div class="bar-row"><span>${label}</span><span style="font-weight:600;">${val != null ? val.toFixed(2) : "-"}</span></div>
       <div class="bar-track"><div class="bar-fill" style="width:${val != null ? (val * 10) + "%" : "0%"};"></div></div>`;
+
+    const fotos = Array.isArray(p.fotos) ? p.fotos : [];
+    const heroStyle = fotos.length
+      ? `background-image:url('${fotos[0]}');background-size:cover;background-position:center;`
+      : `background:${gradientFor(p.id)};`;
+    const thumbsHtml = fotos.length > 1
+      ? `<div style="display:flex;gap:8px;overflow-x:auto;padding:10px 20px 0;">
+          ${fotos.slice(1).map((url) => `
+            <div role="button" tabindex="0" class="detail-thumb" data-url="${url}"
+                 style="flex:0 0 84px;height:64px;border-radius:10px;background-image:url('${url}');background-size:cover;background-position:center;cursor:pointer;"></div>
+          `).join("")}
+        </div>`
+      : "";
+
     return `
       <button class="detail-close" id="detail-close-btn" aria-label="Cerrar">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <div class="detail-photo">${placeholderIconSvg(42)}</div>
+      <div class="detail-photo" id="detail-photo-main" style="${heroStyle}">${fotos.length ? "" : placeholderIconSvg(42)}</div>
+      ${thumbsHtml}
       <div class="detail-body">
         <div>
           <div class="detail-breadcrumb">
@@ -286,6 +305,13 @@
     $("#detail-panel").innerHTML = detailHtml(p);
     $("#detail-overlay").classList.add("open");
     $("#detail-close-btn").addEventListener("click", closeDetail);
+    $$(".detail-thumb").forEach((el) => {
+      el.addEventListener("click", () => {
+        const url = el.dataset.url;
+        const main = $("#detail-photo-main");
+        if (main) main.style.backgroundImage = `url('${url}')`;
+      });
+    });
     $("#detail-map-btn").addEventListener("click", () => {
       closeDetail();
       focusOnMap(id);
