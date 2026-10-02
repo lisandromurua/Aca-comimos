@@ -184,13 +184,14 @@
   }
 
   const markersById = {};
+  let lastMapList = [];
 
   function renderMap(list) {
     if (!map || !markersLayer) return;
     markersLayer.clearLayers();
     for (const key in markersById) delete markersById[key];
-    if (list.length === 0) return;
-    const bounds = [];
+    lastMapList = list;
+    if (list.length === 0) { renderZoneButtons(list); return; }
     list.forEach((p) => {
       const marker = L.marker([p.lat, p.lon], { icon: pinDivIcon(p) });
       const popupHtml = `
@@ -204,16 +205,56 @@
       });
       marker.addTo(markersLayer);
       markersById[p.id] = marker;
-      bounds.push([p.lat, p.lon]);
     });
-    if (bounds.length > 0) {
-      map.fitBounds(bounds, { padding: [30, 30], maxZoom: 14 });
-    }
+    renderZoneButtons(list);
+    fitToZone(list);
+  }
+
+  // Zonas del mapa: una por provincia. Como los lugares están repartidos entre Córdoba
+  // y Buenos Aires (a ~650 km), encuadrar todo junto deja el mapa centrado en el medio
+  // (Santa Fe). Por defecto se encuadra la provincia con más lugares en la lista filtrada,
+  // y se ofrecen botones para saltar a la otra o ver todo.
+  let currentZone = null;   // provincia elegida a mano (null = automático)
+  let pendingFit = null;    // encuadre pendiente si el mapa estaba oculto
+  function zonesOf(list) {
+    const counts = {};
+    list.forEach((p) => { counts[p.provincia] = (counts[p.provincia] || 0) + 1; });
+    return Object.keys(counts).sort((a, b) => counts[b] - counts[a]);
+  }
+  function fitToZone(list) {
+    if (!list.length) return;
+    const zones = zonesOf(list);
+    let zone = currentZone;
+    if (zone !== "__all__" && !zones.includes(zone)) zone = zones[0];
+    const pts = (zone === "__all__" ? list : list.filter((p) => p.provincia === zone)).map((p) => [p.lat, p.lon]);
+    $$(".zone-btn").forEach((b) => b.classList.toggle("active", b.dataset.zone === zone));
+    const doFit = () => map.fitBounds(pts, { paddingTopLeft: [40, 70], paddingBottomRight: [40, 40], maxZoom: 14 });
+    // Si el contenedor está oculto (vista grilla), Leaflet mide 0×0 y calcula mal el encuadre:
+    // lo guardamos y se aplica al mostrar el mapa.
+    if (map.getContainer().clientWidth === 0) pendingFit = doFit;
+    else { pendingFit = null; doFit(); }
+  }
+  function renderZoneButtons(list) {
+    const box = $("#map-zones");
+    if (!box) return;
+    const zones = zonesOf(list);
+    if (zones.length < 2) { box.innerHTML = ""; box.hidden = true; return; }
+    box.hidden = false;
+    box.innerHTML = zones.map((z) => `<button class="zone-btn" type="button" data-zone="${z}">${z}</button>`).join("")
+      + `<button class="zone-btn" type="button" data-zone="__all__">Ver todo</button>`;
+    box.querySelectorAll(".zone-btn").forEach((b) => {
+      b.addEventListener("click", () => {
+        currentZone = b.dataset.zone;
+        map.closePopup();
+        fitToZone(lastMapList);
+      });
+    });
   }
 
   function focusOnMap(id) {
     setView("map");
     if (!map) return;
+    pendingFit = null;
     const marker = markersById[id];
     if (marker) {
       map.setView(marker.getLatLng(), 15);
@@ -240,11 +281,20 @@
     const heroStyle = fotos.length
       ? `background-image:url('${fotos[0]}');background-size:cover;background-position:center;`
       : `background:${gradientFor(p.id)};`;
-    const thumbsHtml = fotos.length > 1
-      ? `<div style="display:flex;gap:8px;overflow-x:auto;padding:10px 20px 0;">
-          ${fotos.slice(1).map((url) => `
-            <div role="button" tabindex="0" class="detail-thumb" data-url="${url}"
-                 style="flex:0 0 84px;height:64px;border-radius:10px;background-image:url('${url}');background-size:cover;background-position:center;cursor:pointer;"></div>
+    const multi = fotos.length > 1;
+    const arrow = (dir, d) => `
+      <button class="gallery-arrow gallery-${dir}" id="gallery-${dir}" aria-label="${dir === "prev" ? "Foto anterior" : "Foto siguiente"}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>
+      </button>`;
+    const galleryControls = multi
+      ? `${arrow("prev", "M15 5l-7 7 7 7")}${arrow("next", "M9 5l7 7-7 7")}
+         <div class="gallery-counter" id="gallery-counter">1 / ${fotos.length}</div>`
+      : "";
+    const thumbsHtml = multi
+      ? `<div class="detail-thumbs">
+          ${fotos.map((url, i) => `
+            <div role="button" tabindex="0" class="detail-thumb${i === 0 ? " active" : ""}" data-index="${i}"
+                 aria-label="Ver foto ${i + 1}" style="background-image:url('${url}');"></div>
           `).join("")}
         </div>`
       : "";
@@ -253,7 +303,7 @@
       <button class="detail-close" id="detail-close-btn" aria-label="Cerrar">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <div class="detail-photo" id="detail-photo-main" style="${heroStyle}">${fotos.length ? "" : placeholderIconSvg(42)}</div>
+      <div class="detail-photo" id="detail-photo-main" style="${heroStyle}">${fotos.length ? galleryControls : placeholderIconSvg(42)}</div>
       ${thumbsHtml}
       <div class="detail-body">
         <div>
@@ -305,13 +355,7 @@
     $("#detail-panel").innerHTML = detailHtml(p);
     $("#detail-overlay").classList.add("open");
     $("#detail-close-btn").addEventListener("click", closeDetail);
-    $$(".detail-thumb").forEach((el) => {
-      el.addEventListener("click", () => {
-        const url = el.dataset.url;
-        const main = $("#detail-photo-main");
-        if (main) main.style.backgroundImage = `url('${url}')`;
-      });
-    });
+    initGallery(Array.isArray(p.fotos) ? p.fotos : []);
     $("#detail-map-btn").addEventListener("click", () => {
       closeDetail();
       focusOnMap(id);
@@ -319,6 +363,53 @@
   }
   function closeDetail() {
     $("#detail-overlay").classList.remove("open");
+    gallery = null;
+  }
+
+  // ---------- galería de fotos (ficha de detalle) ----------
+  let gallery = null; // { fotos, index, go(n) } mientras la ficha está abierta
+  function initGallery(fotos) {
+    gallery = null;
+    if (fotos.length < 2) return;
+    const main = $("#detail-photo-main");
+    const thumbs = $$(".detail-thumb");
+    const counter = $("#gallery-counter");
+    // precargar para que el cambio de foto sea instantáneo
+    fotos.forEach((url) => { const img = new Image(); img.src = url; });
+
+    const go = (n) => {
+      const i = (n + fotos.length) % fotos.length; // da la vuelta en los extremos
+      gallery.index = i;
+      main.style.backgroundImage = `url('${fotos[i]}')`;
+      counter.textContent = `${i + 1} / ${fotos.length}`;
+      thumbs.forEach((t, k) => t.classList.toggle("active", k === i));
+      const t = thumbs[i];
+      if (t) t.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    };
+    gallery = { fotos, index: 0, go };
+
+    $("#gallery-prev").addEventListener("click", (e) => { e.stopPropagation(); go(gallery.index - 1); });
+    $("#gallery-next").addEventListener("click", (e) => { e.stopPropagation(); go(gallery.index + 1); });
+    thumbs.forEach((el) => {
+      const pick = () => go(Number(el.dataset.index));
+      el.addEventListener("click", pick);
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); }
+      });
+    });
+
+    // deslizar con el dedo en mobile
+    let x0 = null, y0 = null;
+    main.addEventListener("touchstart", (e) => {
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    }, { passive: true });
+    main.addEventListener("touchend", (e) => {
+      if (x0 == null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      const dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(gallery.index + (dx < 0 ? 1 : -1));
+      x0 = y0 = null;
+    });
   }
 
   // ---------- view switching ----------
@@ -329,7 +420,10 @@
     $("#view-map").classList.toggle("active", view === "map");
     if (view === "map" && map) {
       // Leaflet needs a resize nudge the first time its container becomes visible.
-      setTimeout(() => map.invalidateSize(), 0);
+      setTimeout(() => {
+        map.invalidateSize();
+        if (pendingFit) { const f = pendingFit; pendingFit = null; f(); }
+      }, 0);
     }
   }
 
@@ -414,11 +508,23 @@
       $("#filter-toggle").setAttribute("aria-expanded", String(isOpen));
     });
 
+    const about = $("#about-overlay");
+    const openAbout = (e) => { e.preventDefault(); about.classList.add("open"); };
+    const closeAbout = () => about.classList.remove("open");
+    $("#about-link").addEventListener("click", openAbout);
+    $("#about-close-btn").addEventListener("click", closeAbout);
+    about.addEventListener("click", (e) => { if (e.target === about) closeAbout(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeAbout(); });
+
     $("#detail-overlay").addEventListener("click", (e) => {
       if (e.target.id === "detail-overlay") closeDetail();
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeDetail();
+      if (gallery && $("#detail-overlay").classList.contains("open")) {
+        if (e.key === "ArrowLeft") gallery.go(gallery.index - 1);
+        if (e.key === "ArrowRight") gallery.go(gallery.index + 1);
+      }
     });
   }
 
