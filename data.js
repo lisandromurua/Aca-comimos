@@ -1601,5 +1601,28 @@ window.PLACES = [
     ],
     "lat": -31.39961,
     "lon": -64.18411
+  },
+  {
+    "id": 84,
+    "nombre": "Bari Café",
+    "provincia": "Córdoba",
+    "localidad": "Córdoba Capital",
+    "barrio": "Jardín",
+    "categoria": "Café/Confitería",
+    "momento": "Merienda",
+    "precio": "$$$",
+    "comida": 8.25,
+    "lugar": 8.0,
+    "atencion": 8.25,
+    "nota": 8.19,
+    "resena": "El lugar es lindo; es para ir un día soleado y disfrutar el patiecito que tienen adelante. El café es rico, al igual que los chipá. La cookie de pistacho que comimos estaba buena, pero se la sentía un tanto grasosa de más y le faltaba más contenido de \"pasta de pistacho\".",
+    "visitas": "1",
+    "distincion": null,
+    "recomendado": false,
+    "fotos": [
+      "images/84-1.jpg"
+    ],
+    "lat": -31.449929,
+    "lon": -64.176776
   }
 ];
