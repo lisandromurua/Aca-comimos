@@ -528,6 +528,24 @@
     });
   }
 
+  // ---------- contador de visitas (GoatCounter) ----------
+  function initVisitCounter() {
+    const tag = document.querySelector("script[data-goatcounter]");
+    const box = $("#visit-count");
+    if (!tag || !box) return;
+    const base = tag.dataset.goatcounter.replace(/\/count$/, "");
+    if (base.includes("CODIGO")) return; // todavía sin configurar
+    fetch(base + "/counter/TOTAL.json")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        const raw = String(d.count ?? d.count_unique ?? "").replace(/\D/g, "");
+        if (!raw) return;
+        box.querySelector("strong").textContent = Number(raw).toLocaleString("es-AR");
+        box.hidden = false;
+      })
+      .catch(() => {}); // si falla, el pie queda como siempre
+  }
+
   // ---------- boot ----------
   document.addEventListener("DOMContentLoaded", () => {
     $("#brand-count").textContent = `${PLACES.length} lugares registrados`;
@@ -535,5 +553,6 @@
     initControls();
     initMap();
     renderAll();
+    initVisitCounter();
   });
 })();

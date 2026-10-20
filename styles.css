@@ -197,6 +197,7 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
 
 .footer-about{font-weight:600;text-decoration:none;}
 .footer-about:hover{text-decoration:underline;}
+.footer-visits strong{font-family:'Jost',sans-serif;font-weight:600;color:var(--ink);}
 .about-panel{padding:28px 28px 24px;max-width:460px;}
 .about-panel p{font-size:15px;line-height:1.6;margin:0 0 10px;}
 .about-title{font-family:'Jost',sans-serif;font-size:24px;font-weight:700;margin:0 0 14px;}
