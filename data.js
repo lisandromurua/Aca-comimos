@@ -115,27 +115,6 @@ window.PLACES = [
     "lon": -64.170681
   },
   {
-    "id": 6,
-    "nombre": "Questa milanga",
-    "provincia": "Córdoba",
-    "localidad": "Córdoba Capital",
-    "barrio": "General Paz",
-    "categoria": "Bar/Vinoteca",
-    "momento": "Cena",
-    "precio": "$$",
-    "comida": 6.5,
-    "lugar": 6.5,
-    "atencion": 6.5,
-    "nota": 6.5,
-    "resena": "Más un bar para tomar una birra que otra cosa. La comida es toda frita/apanada, no da para mucho más que eso. Un lugar para ir sin reserva y zafar una salida improvisada.",
-    "visitas": "1",
-    "distincion": null,
-    "recomendado": false,
-    "fotos": [],
-    "lat": -31.416901,
-    "lon": -64.170174
-  },
-  {
     "id": 7,
     "nombre": "Lo del armenio",
     "provincia": "Córdoba",
