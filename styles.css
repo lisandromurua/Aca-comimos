@@ -222,10 +222,26 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
   .detail-panel{max-width:none;border-radius:20px 20px 0 0;max-height:92vh;}
 }
 
-/* iPhone / iPad: la barra flotante de Safari tapa el borde inferior de la pantalla.
-   Se agrega espacio abajo del pie para que "Acerca de" y el contador queden visibles. */
-@supports (-webkit-touch-callout:none){
-  @media (max-width:720px){
-    .site-footer{padding-bottom:calc(12px + 76px + env(safe-area-inset-bottom, 0px));}
+/* Celular: la página entera se desplaza (como el portfolio).
+   Solo la barra de marca queda fija arriba, fina; los filtros y el pie
+   se desplazan con el contenido, y el pie aparece recién al final. */
+@media (max-width:720px){
+  html,body{height:auto;}
+  body{display:block;min-height:100vh;}
+  main{display:block;}
+  #view-grid{overflow:visible;}
+  .topbar{
+    position:sticky;top:0;z-index:600;
+    padding:10px 16px;flex-wrap:nowrap;
+    background:color-mix(in oklab, var(--surface) 92%, transparent);
+    -webkit-backdrop-filter:saturate(1.4) blur(8px);backdrop-filter:saturate(1.4) blur(8px);
   }
+  .brand-icon{width:30px;height:30px;border-radius:9px;}
+  .brand-title{font-size:17px;}
+  .brand-sub{font-size:11px;}
+  .view-btn{padding:7px 11px;font-size:13px;}
+  #view-map{isolation:isolate;}
+  #view-map.active{height:calc(100svh - 56px);}
+  #map{height:100%;}
+  .site-footer{padding:20px 16px 24px;line-height:1.6;}
 }
