@@ -221,3 +221,11 @@ main{flex-grow:1;min-height:0;display:flex;position:relative;}
   .detail-overlay{padding:0;align-items:flex-end;}
   .detail-panel{max-width:none;border-radius:20px 20px 0 0;max-height:92vh;}
 }
+
+/* iPhone / iPad: la barra flotante de Safari tapa el borde inferior de la pantalla.
+   Se agrega espacio abajo del pie para que "Acerca de" y el contador queden visibles. */
+@supports (-webkit-touch-callout:none){
+  @media (max-width:720px){
+    .site-footer{padding-bottom:calc(12px + 76px + env(safe-area-inset-bottom, 0px));}
+  }
+}
